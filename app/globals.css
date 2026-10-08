@@ -1,26 +1,146 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg-main: #f8fafc;
+    --text-primary: #020617;
+    --text-muted: #334155;
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --card-border: rgba(203, 213, 225, 0.90);
+    --accent-cyan: #0891b2;
+    --accent-teal: #0d9488;
+    --accent-indigo: #4f46e5;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: radial-gradient(ellipse 120% 60% at 50% 0%, rgba(6,182,212,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse 80% 40% at 80% 100%, rgba(20,184,166,0.06) 0%, transparent 60%),
+              #f8fafc;
+  color: #020617;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism Light Mode Effects */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid rgba(226, 232, 240, 0.90);
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 4px 12px 0 rgba(15, 23, 42, 0.03);
+}
+
+.glass-card {
+  background: rgba(248, 250, 252, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(226, 232, 240, 0.80);
+  transition: all 0.25s ease-in-out;
+}
+
+.glass-card:hover {
+  border-color: rgba(8, 145, 178, 0.35);
+  box-shadow: 0 4px 20px -2px rgba(8, 145, 178, 0.12);
+  transform: translateY(-2px);
+}
+
+.glow-emerald {
+  box-shadow: 0 4px 20px -2px rgba(16, 185, 129, 0.25);
+}
+
+.glow-cyan {
+  box-shadow: 0 4px 20px -2px rgba(8, 145, 178, 0.25);
+}
+
+.glow-purple {
+  box-shadow: 0 4px 20px -2px rgba(147, 51, 234, 0.25);
+}
+
+/* Laser Scanner Animation */
+@keyframes scanLaser {
+  0% {
+    top: 0%;
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0.8;
+  }
+}
+
+.animate-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #0891b2, #7c3aed, transparent);
+  box-shadow: 0 0 18px #0891b2, 0 0 6px #7c3aed;
+  animation: scanLaser 2.2s infinite ease-in-out alternate;
+}
+
+/* Step Transition Animation */
+@keyframes fadeSlideUp {
+  0%   { opacity: 0; transform: translateY(24px) scale(0.97); }
+  100% { opacity: 1; transform: translateY(0)   scale(1);    }
+}
+
+@keyframes fadeSlideDown {
+  0%   { opacity: 1; transform: translateY(0)    scale(1);    }
+  100% { opacity: 0; transform: translateY(-20px) scale(0.97); }
+}
+
+@keyframes arrowBounceLeft {
+  0%, 100% { transform: translateX(0);   opacity: 1; }
+  50%       { transform: translateX(-10px); opacity: 0.7; }
+}
+
+@keyframes arrowBounceRight {
+  0%, 100% { transform: translateX(0);   opacity: 1; }
+  50%       { transform: translateX(10px);  opacity: 0.7; }
+}
+
+@keyframes headTurnLeft {
+  0%   { transform: rotateY(0deg)   scaleX(1); }
+  40%  { transform: rotateY(-40deg) scaleX(0.85); }
+  100% { transform: rotateY(-40deg) scaleX(0.85); }
+}
+
+@keyframes headTurnRight {
+  0%   { transform: rotateY(0deg)  scaleX(1); }
+  40%  { transform: rotateY(40deg) scaleX(0.85); }
+  100% { transform: rotateY(40deg) scaleX(0.85); }
+}
+
+@keyframes ringPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(8,145,178,0.35); }
+  50%       { box-shadow: 0 0 0 14px rgba(8,145,178,0); }
+}
+
+.step-transition-enter {
+  animation: fadeSlideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-arrow-left  { animation: arrowBounceLeft  0.9s ease-in-out infinite; }
+.animate-arrow-right { animation: arrowBounceRight 0.9s ease-in-out infinite; }
+.animate-head-left   { animation: headTurnLeft  1.4s ease-in-out infinite alternate; }
+.animate-head-right  { animation: headTurnRight 1.4s ease-in-out infinite alternate; }
+.animate-ring-pulse  { animation: ringPulse 1.6s ease-in-out infinite; }
+
+/* Custom Light Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
