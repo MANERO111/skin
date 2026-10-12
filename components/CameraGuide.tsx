@@ -687,20 +687,20 @@ export const CameraGuide: React.FC<CameraGuideProps> = ({ onPhotosComplete }) =>
           </div>
         </div>
       ) : (
-        <div className="space-y-5">
+        <div className="space-y-4 sm:space-y-5">
           {/* ── Step Progress Bar ─────────────────────────────────────────────────── */}
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-3 gap-2 sm:gap-3">
             {([
               { id: 'front', title: '1. Face', sub: 'Face caméra' },
-              { id: 'left',  title: '2. Gauche', sub: '~45° vers la gauche' },
-              { id: 'right', title: '3. Droite', sub: '~45° vers la droite' },
+              { id: 'left',  title: '2. Gauche', sub: '~45° gauche' },
+              { id: 'right', title: '3. Droite', sub: '~45° droite' },
             ] as const).map((s) => {
               const isDone    = !!photos[s.id];
               const isCurrent = currentStep === s.id;
               return (
                 <div
                   key={s.id}
-                  className={`p-3 rounded-2xl border transition-all ${
+                  className={`p-2 sm:p-3 rounded-2xl border transition-all ${
                     isCurrent
                       ? 'bg-cyan-50 border-cyan-400 shadow-sm'
                       : isDone
@@ -709,15 +709,15 @@ export const CameraGuide: React.FC<CameraGuideProps> = ({ onPhotosComplete }) =>
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-black text-black">{s.title}</span>
+                    <span className="text-[11px] sm:text-xs font-black text-black">{s.title}</span>
                     {isDone
-                      ? <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                      ? <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600" />
                       : isCurrent
                       ? <div className="w-2 h-2 rounded-full bg-cyan-600 animate-pulse" />
                       : null
                     }
                   </div>
-                  <p className="text-[11px] text-slate-700 font-semibold mt-1">{s.sub}</p>
+                  <p className="text-[10px] sm:text-[11px] text-slate-700 font-semibold mt-0.5 sm:mt-1 truncate">{s.sub}</p>
                 </div>
               );
             })}
@@ -726,7 +726,7 @@ export const CameraGuide: React.FC<CameraGuideProps> = ({ onPhotosComplete }) =>
           {/* ── Main Scanner Panel ──────────────────────────────────────────────── */}
           <div className="glass-panel rounded-3xl border border-slate-300 overflow-hidden relative bg-white">
             {/* Viewfinder area */}
-            <div className="relative flex items-center justify-center min-h-[400px] sm:min-h-[500px] bg-slate-900">
+            <div className="relative flex items-center justify-center min-h-[340px] sm:min-h-[460px] md:min-h-[520px] bg-slate-900">
               {/* Video */}
               <video
                 ref={setVideoRef}
@@ -734,14 +734,14 @@ export const CameraGuide: React.FC<CameraGuideProps> = ({ onPhotosComplete }) =>
                 playsInline
                 muted
                 className={`w-full h-full object-cover rounded-t-3xl ${streamActive ? 'block scale-x-[-1]' : 'hidden'}`}
-                style={{ minHeight: '400px', maxHeight: '520px' }}
+                style={{ minHeight: '340px', maxHeight: '520px' }}
               />
 
               {/* No camera fallback */}
               {!streamActive && (
-                <div className="flex flex-col items-center justify-center h-full p-8 text-center space-y-4">
-                  <div className="w-16 h-16 rounded-2xl bg-cyan-100 border border-cyan-300 text-cyan-700 flex items-center justify-center">
-                    <Video className="w-8 h-8" />
+                <div className="flex flex-col items-center justify-center h-full p-6 sm:p-8 text-center space-y-4">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-cyan-100 border border-cyan-300 text-cyan-700 flex items-center justify-center">
+                    <Video className="w-7 h-7 sm:w-8 sm:h-8" />
                   </div>
                   <div>
                     <p className="text-sm text-black font-black">Caméra en direct</p>
@@ -757,10 +757,8 @@ export const CameraGuide: React.FC<CameraGuideProps> = ({ onPhotosComplete }) =>
               {streamActive && (
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
                   <div
-                    className="relative flex items-center justify-center"
+                    className="relative flex items-center justify-center w-[170px] h-[230px] sm:w-[220px] sm:h-[280px]"
                     style={{
-                      width: '220px',
-                      height: '280px',
                       border: `3px solid ${ovalColor}`,
                       borderRadius: '50%',
                       boxShadow: ovalGlow,
@@ -773,7 +771,7 @@ export const CameraGuide: React.FC<CameraGuideProps> = ({ onPhotosComplete }) =>
                       'left-0 top-1/2 -translate-x-1/2 -translate-y-1/2',
                       'right-0 top-1/2 translate-x-1/2 -translate-y-1/2',
                     ].map((pos, i) => (
-                      <div key={i} className={`absolute ${pos} w-3 h-3 rounded-full`}
+                      <div key={i} className={`absolute ${pos} w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full`}
                         style={{ backgroundColor: ovalColor, transition: 'background-color 0.4s ease' }} />
                     ))}
                   </div>
@@ -841,9 +839,9 @@ export const CameraGuide: React.FC<CameraGuideProps> = ({ onPhotosComplete }) =>
             </div>
 
             {/* Status Bar */}
-            <div className="p-4 bg-white border-t border-slate-300">
+            <div className="p-3 sm:p-4 bg-white border-t border-slate-300">
               {/* Main instruction */}
-              <div className="flex items-center gap-3 mb-3">
+              <div className="flex items-center gap-2.5 sm:gap-3 mb-3">
                 <div className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 ${
                   scanState === 'success'  ? 'bg-emerald-100 text-emerald-700 border border-emerald-300' :
                   scanState === 'failed'   ? 'bg-rose-100 text-rose-700 border border-rose-300' :
@@ -857,14 +855,14 @@ export const CameraGuide: React.FC<CameraGuideProps> = ({ onPhotosComplete }) =>
                    <User className="w-5 h-5" />
                   }
                 </div>
-                <div>
-                  <p className="text-xs text-slate-700 font-semibold">{STEP_LABELS[currentStep]}</p>
-                  <p className="text-sm font-black text-black">{STATE_LABELS[scanState]}</p>
+                <div className="min-w-0 flex-1">
+                  <p className="text-[11px] sm:text-xs text-slate-700 font-semibold truncate sm:whitespace-normal">{STEP_LABELS[currentStep]}</p>
+                  <p className="text-xs sm:text-sm font-black text-black truncate sm:whitespace-normal">{STATE_LABELS[scanState]}</p>
                 </div>
               </div>
 
               {/* Check chips */}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {[
                   { label: 'Visage', ok: checks.face },
                   { label: 'Centré', ok: checks.centered },
@@ -873,7 +871,7 @@ export const CameraGuide: React.FC<CameraGuideProps> = ({ onPhotosComplete }) =>
                   { label: 'Éclairage', ok: checks.lighting },
                   { label: 'Netteté', ok: checks.sharp },
                 ].map((c) => (
-                  <span key={c.label} className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold border ${
+                  <span key={c.label} className={`flex items-center gap-1 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-bold border ${
                     c.ok
                       ? 'bg-emerald-100 border-emerald-300 text-emerald-950'
                       : 'bg-slate-100 border-slate-300 text-slate-600'

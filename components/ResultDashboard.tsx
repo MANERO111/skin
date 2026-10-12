@@ -168,17 +168,17 @@ export const ResultDashboard: React.FC<ResultDashboardProps> = ({
     <div className="max-w-5xl mx-auto px-4 py-8 space-y-8">
 
       {/* Action Header bar with PDF Download */}
-      <div className="flex items-center justify-between bg-white p-4 rounded-2xl border border-slate-300 shadow-sm">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white p-3 sm:p-4 rounded-2xl border border-slate-300 shadow-sm">
         <div className="flex items-center gap-2 text-xs text-slate-900 font-bold">
-          <FileText className="w-4 h-4 text-cyan-700" />
+          <FileText className="w-4 h-4 text-cyan-700 shrink-0" />
           <span className="font-extrabold text-black">Rapport de Synthèse Cutanée</span>
-          <span className="text-slate-600 font-medium">• Généré le {new Date().toLocaleDateString('fr-FR')}</span>
+          <span className="text-slate-600 font-medium hidden sm:inline">• Généré le {new Date().toLocaleDateString('fr-FR')}</span>
         </div>
 
         <button
           onClick={handleDownloadPDF}
           disabled={isGeneratingPDF}
-          className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700 text-white font-black text-xs shadow-sm flex items-center gap-2 transition-all disabled:opacity-50"
+          className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700 text-white font-black text-xs shadow-sm flex items-center justify-center gap-2 transition-all disabled:opacity-50"
         >
           {isGeneratingPDF ? (
             <>
@@ -195,28 +195,28 @@ export const ResultDashboard: React.FC<ResultDashboardProps> = ({
       </div>
 
       {/* Printable Report Wrapper (UI) */}
-      <div className="space-y-8 bg-white p-4 sm:p-6 rounded-3xl border border-slate-200">
+      <div className="space-y-6 sm:space-y-8 bg-white p-3 sm:p-6 rounded-3xl border border-slate-200">
 
         {/* ── 1. Header Banner & Profile Badges ─────────────────────────────── */}
-        <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-300 shadow-md relative overflow-hidden bg-white">
+        <div className="glass-panel p-4 sm:p-8 rounded-3xl border border-slate-300 shadow-md relative overflow-hidden bg-white">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
             <div>
               <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-cyan-800 mb-2">
-                <Sparkles className="w-4 h-4 text-cyan-700" />
+                <Sparkles className="w-4 h-4 text-cyan-700 shrink-0" />
                 Profil Cosmétique Vérifié
               </div>
-              <h1 className="text-3xl sm:text-4xl font-black text-black tracking-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tight break-words">
                 {primaryFr.toUpperCase()}
               </h1>
               {recommendations.summary_guidance && (
-                <p className="text-sm font-semibold text-slate-800 mt-2 max-w-xl leading-relaxed">
+                <p className="text-xs sm:text-sm font-semibold text-slate-800 mt-2 max-w-xl leading-relaxed">
                   {recommendations.summary_guidance}
                 </p>
               )}
             </div>
 
-            <div className="flex flex-wrap md:flex-col items-start md:items-end gap-3 shrink-0">
-              <div className="glass-card px-4 py-2 rounded-2xl border border-cyan-300 bg-cyan-50 flex items-center gap-2">
+            <div className="flex flex-wrap md:flex-col items-start md:items-end gap-2.5 sm:gap-3 shrink-0">
+              <div className="glass-card px-3 sm:px-4 py-2 rounded-2xl border border-cyan-300 bg-cyan-50 flex items-center gap-2">
                 <span className="text-xs text-black font-bold">Sensibilité :</span>
                 <span className={`text-xs font-black px-2.5 py-0.5 rounded-full ${classification.sensitivity === 'High'
                     ? 'bg-rose-100 text-rose-950 border border-rose-300'
@@ -228,7 +228,7 @@ export const ResultDashboard: React.FC<ResultDashboardProps> = ({
                 </span>
               </div>
               <div className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-teal-700" />
+                <ShieldCheck className="w-4 h-4 text-teal-700 shrink-0" />
                 Évaluation Cosmétique & Bien-être
               </div>
             </div>
@@ -442,27 +442,27 @@ export const ResultDashboard: React.FC<ResultDashboardProps> = ({
         )}
 
         {/* ── 3. Recommendations Section ────────────────────────────────────── */}
-        <div className="glass-panel p-6 sm:p-8 mt-42 rounded-3xl border border-slate-300 bg-white shadow-md space-y-6">
+        <div className="glass-panel p-4 sm:p-8 rounded-3xl border border-slate-300 bg-white shadow-md space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
             <div>
-              <h2 className="text-xl font-black text-black flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-cyan-700" />
+              <h2 className="text-lg sm:text-xl font-black text-black flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-cyan-700 shrink-0" />
                 Conseils Cosmétiques Personnalisés
               </h2>
               <p className="text-xs font-semibold text-slate-700 mt-0.5">Étapes & ingrédients adaptés à votre profil de peau</p>
             </div>
 
-            <div className="flex items-center gap-2 bg-slate-100 p-1 rounded-2xl border border-slate-300">
+            <div className="flex items-center gap-1.5 sm:gap-2 bg-slate-100 p-1 rounded-2xl border border-slate-300 w-full sm:w-auto">
               <button
                 onClick={() => setActiveTab('routines')}
-                className={`px-4 py-1.5 rounded-xl text-xs font-bold transition-all ${activeTab === 'routines' ? 'bg-cyan-700 text-white shadow-xs' : 'text-slate-800 hover:text-black'
+                className={`flex-1 sm:flex-initial px-3 sm:px-4 py-1.5 rounded-xl text-xs font-bold transition-all text-center ${activeTab === 'routines' ? 'bg-cyan-700 text-white shadow-xs' : 'text-slate-800 hover:text-black'
                   }`}
               >
                 Routines Quotidiennes
               </button>
               <button
                 onClick={() => setActiveTab('ingredients')}
-                className={`px-4 py-1.5 rounded-xl text-xs font-bold transition-all ${activeTab === 'ingredients' ? 'bg-cyan-700 text-white shadow-xs' : 'text-slate-800 hover:text-black'
+                className={`flex-1 sm:flex-initial px-3 sm:px-4 py-1.5 rounded-xl text-xs font-bold transition-all text-center ${activeTab === 'ingredients' ? 'bg-cyan-700 text-white shadow-xs' : 'text-slate-800 hover:text-black'
                   }`}
               >
                 Guide Ingrédients
@@ -475,9 +475,9 @@ export const ResultDashboard: React.FC<ResultDashboardProps> = ({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Morning */}
               {recommendations.morning_routine?.length > 0 && (
-                <div className="glass-card p-5 rounded-2xl border border-amber-300 bg-amber-50/70 space-y-4">
+                <div className="glass-card p-4 sm:p-5 rounded-2xl border border-amber-300 bg-amber-50/70 space-y-4">
                   <div className="flex items-center gap-2 text-amber-950 font-black text-sm">
-                    <Sun className="w-4 h-4 text-amber-700" />
+                    <Sun className="w-4 h-4 text-amber-700 shrink-0" />
                     Routine Matin (AM)
                   </div>
                   <div className="space-y-3">
@@ -494,9 +494,9 @@ export const ResultDashboard: React.FC<ResultDashboardProps> = ({
 
               {/* Evening */}
               {recommendations.evening_routine?.length > 0 && (
-                <div className="glass-card p-5 rounded-2xl border border-indigo-300 bg-indigo-50/70 space-y-4">
+                <div className="glass-card p-4 sm:p-5 rounded-2xl border border-indigo-300 bg-indigo-50/70 space-y-4">
                   <div className="flex items-center gap-2 text-indigo-950 font-black text-sm">
-                    <Moon className="w-4 h-4 text-indigo-700" />
+                    <Moon className="w-4 h-4 text-indigo-700 shrink-0" />
                     Routine Soir (PM)
                   </div>
                   <div className="space-y-3">
@@ -520,7 +520,7 @@ export const ResultDashboard: React.FC<ResultDashboardProps> = ({
                 {recommendations.ingredients_to_seek?.length > 0 && (
                   <div className="glass-card p-4 rounded-2xl border border-emerald-300 bg-emerald-50/70">
                     <h4 className="text-xs font-black text-emerald-950 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                      <ThumbsUp className="w-4 h-4 text-emerald-700" /> Ingrédients Recommandés
+                      <ThumbsUp className="w-4 h-4 text-emerald-700 shrink-0" /> Ingrédients Recommandés
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {recommendations.ingredients_to_seek.map((ing: string, i: number) => (
@@ -535,7 +535,7 @@ export const ResultDashboard: React.FC<ResultDashboardProps> = ({
                 {recommendations.ingredients_to_avoid?.length > 0 && (
                   <div className="glass-card p-4 rounded-2xl border border-rose-300 bg-rose-50/70">
                     <h4 className="text-xs font-black text-rose-950 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                      <ThumbsDown className="w-4 h-4 text-rose-700" /> Ingrédients à Éviter
+                      <ThumbsDown className="w-4 h-4 text-rose-700 shrink-0" /> Ingrédients à Éviter
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {recommendations.ingredients_to_avoid.map((ing: string, i: number) => (
@@ -592,39 +592,39 @@ export const ResultDashboard: React.FC<ResultDashboardProps> = ({
       </div>
 
       {/* ── 4. Action Footer ──────────────────────────────────────────────── */}
-      <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2">
         <button
           onClick={onDeleteClick}
-          className="px-4 py-2.5 rounded-xl bg-white hover:bg-rose-50 text-slate-800 hover:text-rose-700 border border-slate-300 text-xs font-bold flex items-center gap-2 transition-colors shadow-xs"
+          className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-white hover:bg-rose-50 text-slate-800 hover:text-rose-700 border border-slate-300 text-xs font-bold flex items-center justify-center gap-2 transition-colors shadow-xs order-last sm:order-first"
         >
-          <Trash2 className="w-4 h-4 text-rose-600" />
+          <Trash2 className="w-4 h-4 text-rose-600 shrink-0" />
           Supprimer mes photos & données
         </button>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
           <button
             onClick={handleDownloadPDF}
             disabled={isGeneratingPDF}
-            className="px-5 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-black text-xs font-black border border-slate-300 shadow-xs flex items-center gap-2 transition-colors"
+            className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-black text-xs font-black border border-slate-300 shadow-xs flex items-center justify-center gap-2 transition-colors disabled:opacity-50"
           >
-            {isGeneratingPDF ? <Loader2 className="w-4 h-4 animate-spin text-cyan-700" /> : <Download className="w-4 h-4 text-cyan-700" />}
+            {isGeneratingPDF ? <Loader2 className="w-4 h-4 animate-spin text-cyan-700 shrink-0" /> : <Download className="w-4 h-4 text-cyan-700 shrink-0" />}
             Télécharger le Rapport (PDF)
           </button>
 
           <button
             onClick={onCompareClick}
-            className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-black text-xs font-black border border-slate-300 flex items-center gap-2 transition-colors"
+            className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-black text-xs font-black border border-slate-300 flex items-center justify-center gap-2 transition-colors"
           >
-            <History className="w-4 h-4 text-cyan-700" />
+            <History className="w-4 h-4 text-cyan-700 shrink-0" />
             Comparer les progrès
           </button>
 
           <button
             onClick={handleSave}
-            className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-teal-600 text-white text-xs font-black shadow-md hover:scale-105 transition-all flex items-center gap-2"
+            className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-teal-600 text-white text-xs font-black shadow-md hover:scale-105 transition-all flex items-center justify-center gap-2"
           >
             {savedSuccess ? (
-              <><CheckCircle2 className="w-4 h-4" /> Sauvegardé !</>
+              <><CheckCircle2 className="w-4 h-4 shrink-0" /> Sauvegardé !</>
             ) : (
               <>Sauvegarder l'analyse</>
             )}
