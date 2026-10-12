@@ -13,7 +13,7 @@ export const HistoryCompare: React.FC<HistoryCompareProps> = ({ onBackToAnalysis
 
   useEffect(() => {
     // Fetch timeline from Unified Python API backend
-    fetch('http://localhost:5000/api/history/compare')
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/history/compare`)
       .then((res) => res.json())
       .then((data) => {
         if (data.timeline) {

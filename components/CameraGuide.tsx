@@ -450,7 +450,7 @@ export const CameraGuide: React.FC<CameraGuideProps> = ({ onPhotosComplete }) =>
     const payload: Record<string, string> = { [step]: imageData };
 
     try {
-      const res = await fetch('http://localhost:5000/api/analysis/validate-photos', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/analysis/validate-photos`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
